@@ -1,3 +1,11 @@
+autopep8==2.0.1
 customtkinter==5.1.0
 darkdetect==0.8.0
+distlib==0.3.6
+et-xmlfile==1.1.0
+filelock==3.8.2
+openpyxl==3.0.10
 Pillow==9.4.0
+platformdirs==2.6.0
+pycodestyle==2.10.0
+virtualenv==20.17.1
