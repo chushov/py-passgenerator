@@ -32,7 +32,7 @@ class App(ctk.CTk):
         self.settings_frame.grid(row=2, column=0, padx=(20, 20), pady=(20, 0), sticky="nsew")
 
         self.password_length_slider = ctk.CTkSlider(master=self.settings_frame,
-                                                    from_=0, to=100, number_of_steps=100,
+                                                    from_=0, to=24, number_of_steps=24,
                                                     command=self.slider_event)
         self.password_length_slider.grid(row=1, column=0, columnspan=3, pady=(20, 20), sticky="ew")
 
@@ -53,13 +53,13 @@ class App(ctk.CTk):
 
         self.cb_upper_var = tkinter.StringVar()
         self.cb_upper = ctk.CTkCheckBox(master=self.settings_frame, text="A-Z",
-                                        variable=self.cb_upper_var, onvalue=ascii_lowercase,
+                                        variable=self.cb_upper_var, onvalue=ascii_uppercase,
                                         offvalue="")
         self.cb_upper.grid(row=2, column=2)
 
         self.cb_symbol_var = tkinter.StringVar()
         self.cb_symbol = ctk.CTkCheckBox(master=self.settings_frame, text="@#$%",
-                                         variable=self.cb_symbol_var, onvalue=ascii_lowercase,
+                                         variable=self.cb_symbol_var, onvalue=punctuation,
                                          offvalue="")
         self.cb_symbol.grid(row=2, column=3)
 
@@ -68,6 +68,10 @@ class App(ctk.CTk):
                                                              command=self.change_appearance_mode_event)
 
         self.appearance_mode_option_menu.grid(row=3, column=0, columnspan=4, pady=(10, 10))
+
+        self.appearance_mode_option_menu.set("System")
+        self.password_length_slider.set(12)
+        self.password_length_entry.insert(0, "12")
 
     def change_appearance_mode_event(self, new_appearance_mode):
         ctk.set_appearance_mode(new_appearance_mode)
@@ -84,7 +88,8 @@ class App(ctk.CTk):
         return chars
 
     def set_password(self):
-        pass
+        self.entry_password.delete(0, 'end')
+        self.entry_password.insert(0, password.create_new(length=int(self.password_length_slider.get()), characters=self.get_characters()))
 
 
 if __name__ == "__main__":
